@@ -441,8 +441,8 @@ fclose(fptr);
 admin();
 }
 else{
-system("cls");
-goto jump2;
+    system("cls");
+    goto jump2;
 }
 fseek(fptr ,-sizeof(tech),SEEK_CUR);
 fwrite(&tech, sizeof(tech), 1, fptr);
@@ -450,184 +450,182 @@ fclose(fptr);
 }
 }
 else if(c==3){
-system("cls");
-fclose(fptr);
-admin();
+    system("cls");
+    fclose(fptr);
+    admin();
 }
 void teacher_panel( int x)
 {
-FILE *fptr;
-int c,i,j=0;
-char ch;
-char name[20];
-jump:
-system("cls");
-printf("Teachers Panel\n");
-printf("1. Provide Class Test Marks\n");
-printf("2. Find Student\n");
-printf("3. Count of Student\n");
-printf("4. Go Back\n");
-printf("Enter your choice) : ");
-scanf("%d",&c);
-fptr = fopen("record.bin","rb+");
-fscanf(fptr,"%d",&Nt);
-struct teacher tech[Nt];
-fread(&tech,sizeof(tech),1,fptr );
-fscanf(fptr,"%d",&Ns);
-struct student stud[Ns];
-fread(&stud,sizeof(stud),1,fptr );
-if(c==1){
-system("cls");
-for(i=0;i<Ns;i++){
-system("cls");
-printf("Provide Class Test Marks\n");
-printf("Class Test Mark for Roll-%d: ",stud[i].roll);
-for( j=0;j<tech[x].total_course;j++){
-printf("%s:",tech[x].course[j]);
-scanf("%d",&stud[i].marks[x][j]);
-}}
-fseek(fptr ,-sizeof(stud),SEEK_CUR);
-fwrite(&stud, sizeof(stud), 1, fptr);
-fclose(fptr);
-system("cls");
-printf("Done! Press Enter to continue... /n");
-getchar();
-goto jump;
+    FILE *fptr;
+    int c,i,j=0;
+    char ch;
+    char name[20];
+    jump:
+    system("cls");
+    printf("Teachers Panel\n");
+    printf("1. Provide Class Test Marks\n");
+    printf("2. Find Student\n");
+    printf("3. Count of Student\n");
+    printf("4. Go Back\n");
+    printf("Enter your choice) : ");
+    scanf("%d",&c);
+    fptr = fopen("record.bin","rb+");
+    fscanf(fptr,"%d",&Nt);
+    struct teacher tech[Nt];
+    fread(&tech,sizeof(tech),1,fptr );
+    fscanf(fptr,"%d",&Ns);
+    struct student stud[Ns];
+    fread(&stud,sizeof(stud),1,fptr );
+    if(c==1){
+        system("cls");
+        for(i=0;i<Ns;i++){
+            system("cls");
+            printf("Provide Class Test Marks\n");
+            printf("Class Test Mark for Roll-%d: ",stud[i].roll);
+            for( j=0;j<tech[x].total_course;j++){
+                printf("%s:",tech[x].course[j]);
+                scanf("%d",&stud[i].marks[x][j]);
+            }
+        }
+        fseek(fptr ,-sizeof(stud),SEEK_CUR);
+        fwrite(&stud, sizeof(stud), 1, fptr);
+        fclose(fptr);
+        system("cls");
+        printf("Done! Press Enter to continue... /n");
+        getchar();
+        goto jump;
+    }
+    else if(c==2){
+        system("cls");
+        printf("Find Student/n");
+        printf("Search Student by First Name: ");
+        fflush(stdin);
+        gets(name);
+        for( i=0;i<Ns;i++){
+            if(compare(stud[i].name,name)){
+                system("cls");
+                printf("Name: %s\t",stud[i].name);
+                printf("Roll: %d\t",stud[i].roll);
+                printf("Address: %s\t",stud[i].address);
+                printf("Mobile: %s\t",stud[i].mobile);
+                printf("Email: %s\n", stud[i].email);
+                printf("Class Test Marks:");
+                for( j=0;j<tech[x].total_course;j++){
+                    printf("%s:",tech[x].course[j]);
+                    printf("%d",stud[i].marks[x][j]);
+                    printf("Press Enter to continue... \n");
+                    getchar();
+                    goto jump;
+                }
+            }
+            if(j==0){
+                printf("No match found! Press enter to continue.../n ");
+                getchar();
+                goto jump;
+            }
+        }
+    }
+    else if(c==3){
+        system("cls");
+        printf("Count of Student\n");
+        printf("Total Students: %d\n",Ns);
+        printf("Press enter to continue... \n");
+        getchar();
+        goto jump;
+    }
+    else if(c==4){
+        system("cls");
+        menu();
+    }
+    else{
+        goto jump;
+    }
 }
-else
-if(c==2){
-system("cls");
-printf("Find Student/n");
-printf("Search Student by First Name: ");
-fflush(stdin);
-gets(name);
-for( i=0;i<Ns;i++){
-if(compare(stud[i].name,name)){
-system("cls");
-printf("Name: %s\t",stud[i].name);
-printf("Roll: %d\t",stud[i].roll);
-printf("Address: %s\t",stud[i].address);
-printf("Mobile: %s\t",stud[i].mobile);
-printf("Email: %s\n", stud[i].email);
-printf("Class Test Marks:");
-for( j=0;j<tech[x].total_course;j++){
-printf("%s:",tech[x].course[j]);
-printf("%d",stud[i].marks[x][j]);
-printf("Press Enter to continue... \n");
-getchar();
-goto jump;
-}
-}
-if(j==0){
-printf("No match found! Press enter to
-continue.../n ");
-getchar();
-goto jump;
-}
-}
-}
-else if(c==3){
-system("cls");
-printf("Count of Student\n");
-printf("Total Students: %d\n",Ns);
-printf("Press enter to continue... \n");
-getchar();
-goto jump;
-}
-else if(c==4){
-system("cls");
-menu();
-}
-else{
-goto jump;
-}
-}void student_panel(int x)
+void student_panel(int x)
 {
-int c;
-FILE *fptr;
-fptr = fopen("record.bin","rb+");
-if(fptr == NULL){
-printf("Error! Pess enter to continue....\n");
-getchar();
-menu();
-}
-fscanf(fptr,"%d",&Nt);
-struct teacher tech[Nt];
-fread(&tech,sizeof(tech),1,fptr );
-fscanf(fptr,"%d",&Ns);
-struct student stud[Ns];
-fread(&stud,sizeof(stud),1,fptr );
-system("cls");
-printf("1. Check Test Marks\n");
-printf("Enter your choice : ");
-scanf("%d",&c);
-if(c==1){
-system("cls");
-printf("Test Marks\n");
-printf("Name: %s\n",stud[x].name);
-printf("Roll: %d\n",stud[x].roll);
-printf("\n");
-printf("Test marks are: ");
-printf("\n");
-for(int i=0;i<Nt;i++){
-for(int j=0;j<tech[i].total_course;j++){
-printf("%s:
-%d\n",tech[i].course[j],stud[x].marks[i][j]);
-}
-}
-}
-fclose(fptr);
-printf("\n");
-printf("Press Enter to continue...\n ");
-getchar();
-menu();
+    int c;
+    FILE *fptr;
+    fptr = fopen("record.bin","rb+");
+    if(fptr == NULL){
+        printf("Error! Pess enter to continue....\n");
+        getchar();
+        menu();
+    }
+    fscanf(fptr,"%d",&Nt);
+    struct teacher tech[Nt];
+    fread(&tech,sizeof(tech),1,fptr );
+    fscanf(fptr,"%d",&Ns);
+    struct student stud[Ns];
+    fread(&stud,sizeof(stud),1,fptr );
+    system("cls");
+    printf("1. Check Test Marks\n");
+    printf("Enter your choice : ");
+    scanf("%d",&c);
+    if(c==1){
+        system("cls");
+        printf("Test Marks\n");
+        printf("Name: %s\n",stud[x].name);
+        printf("Roll: %d\n",stud[x].roll);
+        printf("\n");
+        printf("Test marks are: ");
+        printf("\n");
+        for(int i=0;i<Nt;i++){
+            for(int j=0;j<tech[i].total_course;j++){
+                printf("%s: %d \n",tech[i].course[j],stud[x].marks[i][j]);
+            }
+        }
+    }
+    fclose(fptr);
+    printf("\n");
+    printf("Press Enter to continue...\n ");
+    getchar();
+    menu();
 }
 int compare(char a[],char b[])
 {
-string
-int flag=0,i=0;
-while(a[i]!=' '){
-if(a[i]!=b[i]){
-flag=1;
-break;
+    int flag=0,i=0;
+    while(a[i]!=' '){
+        if(a[i]!=b[i]){
+            flag=1;
+            break;
+        }
+        i++;
+    }
+    if (flag==0)
+        return 1;
+    else
+        return 0;
 }
-i++;
-}
-if (flag==0)
-return 1;
-else
-return 0;
 // function for comparision two}
-int main(){
-FILE *fptr;
-char user_name[20];
-char pass[20];
-fptr=fopen("record.bin","r");
-if(fptr==NULL){
-jump:
-system("cls");
-printf("\n\t\tWelcome to Department Management System.\n");
-printf("\n\t#####################################################\n\n"
-);
-printf("Admin Panel\n");
-printf("Enter Name: ");
-fflush(stdin);
-gets(user_name);
-printf("Enter password: ");
-fflush(stdin);
-gets(pass);
-if(strcmp(user_name,auser_name)==0 &&
-strcmp(pass,apassword)==0){
-teachers();
-}
-else{
-goto jump;
-}
-}
-else{
-printf("\n\t\tWelcome to Department Management System.\n");
-printf("\n\t#####################################################\n\n"
-);
-menu();
-}
+int main()
+{
+    FILE *fptr;
+    char user_name[20];
+    char pass[20];
+    fptr=fopen("record.bin","r");
+    if(fptr==NULL){
+        jump:
+        system("cls");
+        printf("\n\t\tWelcome to Department Management System.\n");
+        printf("\n\t#####################################################\n\n"
+        );
+        printf("Admin Panel\n");
+        printf("Enter Name: ");
+        fflush(stdin);
+        gets(user_name);
+        printf("Enter password: ");
+        fflush(stdin);
+        gets(pass);
+        if(strcmp(user_name,auser_name)==0 && strcmp(pass,apassword)==0){
+            teachers();
+        }
+        else{
+            goto jump;
+        }
+    }
+    else{
+        printf("\n\t\tWelcome to Department Management System.\n");
+        printf("\n\t#####################################################\n\n");
+        menu();
+    }
 }

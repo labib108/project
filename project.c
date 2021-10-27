@@ -258,201 +258,197 @@ menu();
 }
 void update()
 {
-char ch;
-FILE *fptr;
-char tname[20];
-int r;
-fptr = fopen("record.bin","rb+");
-printf("Update Teachers & Students Information\n");
-int c;
-printf("1. Update Teacher Information\n");
-printf("2. Update Student Information\n");
-printf("3. Go Back\n");
-printf("Enter your choice : ");scanf("%d",&c);
-if(c==1){
-system("cls");
-printf("Update Teacher Information\n");
-printf("Search Teacher by Full Name: ");
-fflush(stdin);
-gets(tname);
-fscanf(fptr,"%d",&Nt);
-struct teacher tech[Nt];
-fread(&tech,sizeof(tech),1,fptr );
-system("cls");
-for(int i=0;i<Nt;i++)
-{
-if((strcmp(tname,tech[i].name)) == 0)
-{
-printf("Update Teacher Information\n");
-printf("Enter name: ");
-fflush(stdin);
-gets(tech[i].name);
-printf("Enter mobile: ");
-fflush(stdin);
-gets(tech[i].mobile);
-printf("Enter E-mail: ");
-fflush(stdin);
-gets(tech[i].email);
-printf("Enter New Password: ");
-fflush(stdin);
-gets(tech[i].password);
-system("cls");
-}
-}
-fseek(fptr ,-sizeof(tech),SEEK_CUR);
-fwrite(&tech, sizeof(tech), 1, fptr);
-}
-printf("Update Teacher Information\n");
-printf("Press any key to continue... \n");
-getchar();
-fclose(fptr);
-update();
-else if(c==2)
-{
-system("cls");
-printf("Update Student Information\n");
-printf("Search Student by Roll: ");
-scanf("%d",&r);
-system("cls");
-fscanf(fptr,"%d",&Nt);
-struct teacher tech[Nt];
-fread(&tech,sizeof(tech),1,fptr );
-fscanf(fptr,"%d",Ns);
-struct student stud[Ns];
-fread(&stud,sizeof(stud),1,fptr );
-for(int i=0;i<Ns;i++)
-{if(r==stud[i].roll)
-{
-printf("Update Student Information");
-fflush(stdin);
-printf("Enter name: ");
-gets(stud[i].name);
-printf("Enter Roll: ");
-scanf("%d",&stud[i].roll);
-printf("Enter E-mail: ");
-fflush(stdin);
-gets(stud[i].email);
-printf("Enter Mobile: ");
-fflush(stdin);
-gets(stud[i].mobile);
-printf("Enter Address: ");
-fflush(stdin);
-gets(stud[i].address);
-printf("Enter Password: ");
-fflush(stdin);
-gets(stud[i].password);
-system("cls");
-}
-}
-fseek(fptr ,-sizeof(stud),SEEK_CUR);
-fwrite(&stud, sizeof(stud), 1, fptr);
-printf("Update Student Information\n");
-printf("Press any key to continue...\n ");
-getchar();
-fclose(fptr);
-update();
-}
-}
-else if(c==3)
-{
-system("cls");
-fclose(fptr);
-admin();
-}
-else{
-system("cls");
-fclose(fptr);
-update();
+    char ch;
+    FILE *fptr;
+    char tname[20];
+    int r;
+    fptr = fopen("record.bin","rb+");
+    printf("Update Teachers & Students Information\n");
+    int c;
+    printf("1. Update Teacher Information\n");
+    printf("2. Update Student Information\n");
+    printf("3. Go Back\n");
+    printf("Enter your choice : ");scanf("%d",&c);
+    if(c==1){
+        system("cls");
+        printf("Update Teacher Information\n");
+        printf("Search Teacher by Full Name: ");
+        fflush(stdin);
+        gets(tname);
+        fscanf(fptr,"%d",&Nt);
+        struct teacher tech[Nt];
+        fread(&tech,sizeof(tech),1,fptr );
+        system("cls");
+        for(int i=0;i<Nt;i++)
+        {
+            if((strcmp(tname,tech[i].name)) == 0){
+                printf("Update Teacher Information\n");
+                printf("Enter name: ");
+                fflush(stdin);
+                gets(tech[i].name);
+                printf("Enter mobile: ");
+                fflush(stdin);
+                gets(tech[i].mobile);
+                printf("Enter E-mail: ");
+                fflush(stdin);
+                gets(tech[i].email);
+                printf("Enter New Password: ");
+                fflush(stdin);
+                gets(tech[i].password);
+                system("cls");
+            }
+        }
+        fseek(fptr ,-sizeof(tech),SEEK_CUR);
+        fwrite(&tech, sizeof(tech), 1, fptr);
+        printf("Update Teacher Information\n");
+        printf("Press any key to continue... \n");
+        getchar();
+        fclose(fptr);
+        update();
+    }
+    else if(c==2){
+        system("cls");
+        printf("Update Student Information\n");
+        printf("Search Student by Roll: ");
+        scanf("%d",&r);
+        system("cls");
+        fscanf(fptr,"%d",&Nt);
+        struct teacher tech[Nt];
+        fread(&tech,sizeof(tech),1,fptr );
+        fscanf(fptr,"%d",Ns);
+        struct student stud[Ns];
+        fread(&stud,sizeof(stud),1,fptr );
+        for(int i=0;i<Ns;i++){
+            if(r==stud[i].roll){
+                printf("Update Student Information");
+                fflush(stdin);
+                printf("Enter name: ");
+                gets(stud[i].name);
+                printf("Enter Roll: ");
+                scanf("%d",&stud[i].roll);
+                printf("Enter E-mail: ");
+                fflush(stdin);
+                gets(stud[i].email);
+                printf("Enter Mobile: ");
+                fflush(stdin);
+                gets(stud[i].mobile);
+                printf("Enter Address: ");
+                fflush(stdin);
+                gets(stud[i].address);
+                printf("Enter Password: ");
+                fflush(stdin);
+                gets(stud[i].password);
+                system("cls");
+            }
+        }
+        fseek(fptr ,-sizeof(stud),SEEK_CUR);
+        fwrite(&stud, sizeof(stud), 1, fptr);
+        printf("Update Student Information\n");
+        printf("Press any key to continue...\n ");
+        getchar();
+        fclose(fptr);
+        update();
+    }
+    else if(c==3){
+        system("cls");
+        fclose(fptr);
+        admin();
+    }
+    else{
+        system("cls");
+        fclose(fptr);
+        update();
+    }
 }
 void assigning()
 {
-char ch;
-char tname[20];
-int c;
-FILE *fptr;
-fptr = fopen("record.bin","rb+");
-fscanf(fptr,"%d",&Nt);
-struct teacher tech[Nt];
-fread(&tech,sizeof(tech),1,fptr );
-printf("Assign & Update Courses to the Teachers\n");printf("1.Assign Courses\n");
-printf("2. Update Courses\n");
-printf("3. Go Back\n");
-printf("Enter your choice (i.g enter number) : ");
-scanf("%d",&c);
-if(c==1){
-if(fptr == NULL)
-{
-printf("Error!\n");
-admin();
-}
-system("cls");
-for(int i=0;i<Nt;i++){
-printf("Assign Courses\n");
-printf("How courses you want add for %s: ",tech[i].name);
-scanf("%d",&tech[i].total_course);
-system("cls");
-for(int j=0;j<tech[i].total_course;j++){
-printf("Assign Courses\n");
-printf("Assign Course for %s: ",tech[i].name);
-fflush(stdin);
-gets(tech[i].course[j]);
-system("cls");
-}
-}
-fseek(fptr ,-sizeof(tech),SEEK_CUR);
-fwrite(&tech, sizeof(tech), 1, fptr);
-fclose(fptr);
-system("cls");
-printf("Done! Press Enter to continue...\n");
-getchar();
-admin();
-}
-else if(c==2){
-jump:
-if(fptr == NULL){
-printf("Error!");
-admin();
-}
-system("cls");
-printf("Update Course\n");
-printf("Search Teacher by Full Name: ");
-fflush(stdin);
-gets(tname);
-for(int i=0;i<Nt;i++){
-if((strcmp(tname,tech[i].name)) == 0){
-system("cls");
-printf("Update Course\n");
-printf("Assign New Course for %d. %s:
-",i+1,tech[i].name);
-fflush(stdin);
-gets(tech[i].course);
-system("cls");
-}
-}
-jump2:
-printf("Assign Courses\n");printf("Updating Again? Y/N :\t");
-scanf("%c",&ch);
-if(ch=='Y'){
-goto jump;
-}
-else if(ch=='N'){
-system("cls");
-fclose(fptr);
-admin();
-}
-else{
-    system("cls");
-    goto jump2;
-}
-fseek(fptr ,-sizeof(tech),SEEK_CUR);
-fwrite(&tech, sizeof(tech), 1, fptr);
-fclose(fptr);
-}
-}
-else if(c==3){
-    system("cls");
-    fclose(fptr);
-    admin();
+    char ch;
+    char tname[20];
+    int c;
+    FILE *fptr;
+    fptr = fopen("record.bin","rb+");
+    fscanf(fptr,"%d",&Nt);
+    struct teacher tech[Nt];
+    fread(&tech,sizeof(tech),1,fptr );
+    printf("Assign & Update Courses to the Teachers\n");printf("1.Assign Courses\n");
+    printf("2. Update Courses\n");
+    printf("3. Go Back\n");
+    printf("Enter your choice (i.g enter number) : ");
+    scanf("%d",&c);
+    if(c==1){
+        if(fptr == NULL)
+        {
+            printf("Error!\n");
+            admin();
+        }
+        system("cls");
+        for(int i=0;i<Nt;i++){
+            printf("Assign Courses\n");
+            printf("How courses you want add for %s: ",tech[i].name);
+            scanf("%d",&tech[i].total_course);
+            system("cls");
+            for(int j=0;j<tech[i].total_course;j++){
+                printf("Assign Courses\n");
+                printf("Assign Course for %s: ",tech[i].name);
+                fflush(stdin);
+                gets(tech[i].course[j]);
+                system("cls");
+            }
+        }
+        fseek(fptr ,-sizeof(tech),SEEK_CUR);
+        fwrite(&tech, sizeof(tech), 1, fptr);
+        fclose(fptr);
+        system("cls");
+        printf("Done! Press Enter to continue...\n");
+        getchar();
+        admin();
+    }
+    else if(c==2){
+        jump:
+        if(fptr == NULL){
+            printf("Error!");
+            admin();
+        }
+        system("cls");
+        printf("Update Course\n");
+        printf("Search Teacher by Full Name: ");
+        fflush(stdin);
+        gets(tname);
+        for(int i=0;i<Nt;i++){
+            if((strcmp(tname,tech[i].name)) == 0){
+                system("cls");
+                printf("Update Course\n");
+                printf("Assign New Course for %d. %s: ",i+1,tech[i].name);
+                fflush(stdin);
+                gets(tech[i].course);
+                system("cls");
+            }
+        }
+        jump2:
+        printf("Assign Courses\n");printf("Updating Again? Y/N :\t");
+        scanf("%c",&ch);
+        if(ch=='Y'){
+            goto jump;
+        }
+        else if(ch=='N'){
+            system("cls");
+            fclose(fptr);
+            admin();
+        }
+        else{
+            system("cls");
+            goto jump2;
+        }
+        fseek(fptr ,-sizeof(tech),SEEK_CUR);
+        fwrite(&tech, sizeof(tech), 1, fptr);
+        fclose(fptr);
+        }
+    }
+    else if(c==3){
+        system("cls");
+        fclose(fptr);
+        admin();
+    }
 }
 void teacher_panel( int x)
 {

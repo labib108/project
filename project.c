@@ -1,5 +1,5 @@
-/* Use admin as a user name and admin as a password
-*/
+// Use admin as a user name and admin as a password
+
 #include<stdio.h>
 #include<conio.h>
 #include<stdlib.h>
@@ -9,252 +9,248 @@ int Ns, Nt;
 char auser_name[]="admin";
 char apassword[]="admin";
 struct student{
-char name[50];
-int roll;
-char address[50];
-char mobile[20];
-char email[30];
-int marks[100][100];
-char password[50];
+    char name[50];
+    int roll;
+    char address[50];
+    char mobile[20];
+    char email[30];
+    int marks[100][100];
+    char password[50];
 //student structure
 };
 struct teacher{
-char name[50];
-char mobile[20];
-char email[30];
-char course[100][50];
-char password[50];
-int total_course;
+    char name[50];
+    char mobile[20];
+    char email[30];
+    char course[100][50];
+    char password[50];
+    int total_course;
 }; //Teacher structure
-void menu(){
-char ch;
-FILE *fptr;
-char user_name[50];
-char pass[50];
-int r,i,x,flag=0;
-int num[2]; // Main menu of the program
-system("cls");
-printf("\n\t\tWelcome to Department Management System.\n");
-printf("\n\t#####################################################\n\n"
-);
-printf("1. Admin Panel\n");
-printf("2. Teacher Panel\n");
-printf("3. Student Panel\n");
-printf("Enter your choice : ");
-int c;
-scanf("%d",&c);
-fptr = fopen("record.bin","rb+");
-fscanf(fptr,"%d",&Nt);
-struct teacher tech[Nt];
-fread(&tech,sizeof(tech),1,fptr );fscanf(fptr,"%d",&Ns);
-struct student stud[Ns];
-fread(&stud,sizeof(stud),1,fptr );
-if(c==1){
-system("cls");
-printf("Admin Panel\n");
-printf("Enter Name: ");
-fflush(stdin);
-gets(user_name);
-printf("Enter password: ");
-fflush(stdin);
-gets(pass);
-if(strcmp(user_name,auser_name)==0 &&
-strcmp(pass,apassword)==0){
-flag=1;
-}
-if(flag==1){
-system("cls");
-admin();
-}
-else{
-system("cls");
-printf("Wrong Username or Password! Press any key to
-continue...\n");
-getchar();
-menu();
-}
-}
-else if(c==2){
-jump3:
-system("cls");
-printf("Teacher Panel\n");
-printf("Enter Name: ");
-fflush(stdin);
-gets(user_name);
-printf("Enter password: ");
-fflush(stdin);
-gets(pass);
-for( i=0;i<Nt;i++){
-if(strcmp(user_name,tech[i].name)==0 &&
-strcmp(pass,tech[i].password)==0){
-flag=1;
-x=i;
-}
-}
-if(flag==1){
-system("cls");
-fclose(fptr);
-teacher_panel(x);
-}
-else{
-system("cls");
-printf("Wrong Username or Password!\n Press any key to
-continue...\n ");
-getchar();
-menu();
-}}
-else if(c==3){
-system("cls");
-printf("Student Panel");
-printf("Enter Name: ");
-fflush(stdin);
-gets(user_name);
-printf("Enter password: ");
-fflush(stdin);
-gets(pass);
-for( i=0;i<Ns;i++){
-if(strcmp(user_name,stud[i].name)==0 &&
-strcmp(pass,stud[i].password)==0){
-flag=1;
-x=i;
-}
-}
-if(flag==1){
-system("cls");
-fclose(fptr);
-student_panel(x);
-}
-else{
-system("cls");
-printf("Wrong Username or Password!\n Press any key to
-continue...\n ");
-getchar();
-menu();
-}
-}
-else
-menu();
+void menu()
+{
+    char ch;
+    FILE *fptr;
+    char user_name[50];
+    char pass[50];
+    int r,i,x,flag=0;
+    int num[2]; // Main menu of the program
+    system("cls");
+    printf("\n\t\tWelcome to Department Management System.\n");
+    printf("\n\t#####################################################\n\n");
+    printf("1. Admin Panel\n");
+    printf("2. Teacher Panel\n");
+    printf("3. Student Panel\n");
+    printf("Enter your choice : ");
+    int c;
+    scanf("%d",&c);
+    fptr = fopen("record.bin","rb+");
+    fscanf(fptr,"%d",&Nt);
+    struct teacher tech[Nt];
+    fread(&tech,sizeof(tech),1,fptr );fscanf(fptr,"%d",&Ns);
+    struct student stud[Ns];
+    fread(&stud,sizeof(stud),1,fptr );
+    if(c==1){
+        system("cls");
+        printf("Admin Panel\n");
+        printf("Enter Name: ");
+        fflush(stdin);
+        gets(user_name);
+        printf("Enter password: ");
+        fflush(stdin);
+        gets(pass);
+        if(strcmp(user_name,auser_name)==0 && strcmp(pass,apassword)==0){
+            flag=1;
+        }
+        if(flag==1){
+            system("cls");
+            admin();
+        }
+        else{
+            system("cls");
+            printf("Wrong Username or Password! Press any key to continue...\n");
+            getchar();
+            menu();
+        }
+    }
+    else if(c==2){
+        jump3:
+        system("cls");
+        printf("Teacher Panel\n");
+        printf("Enter Name: ");
+        fflush(stdin);
+        gets(user_name);
+        printf("Enter password: ");
+        fflush(stdin);
+        gets(pass);
+        for( i=0;i<Nt;i++){
+            if(strcmp(user_name,tech[i].name)==0 && strcmp(pass,tech[i].password)==0){
+                flag=1;
+                x=i;
+            }
+        }
+        if(flag==1){
+            system("cls");
+            fclose(fptr);
+            teacher_panel(x);
+        }
+        else{
+            system("cls");
+            printf("Wrong Username or Password!\n Press any key to continue...\n ");
+            getchar();
+            menu();
+        }
+    }
+    else if(c==3){
+        system("cls");
+        printf("Student Panel");
+        printf("Enter Name: ");
+        fflush(stdin);
+        gets(user_name);
+        printf("Enter password: ");
+        fflush(stdin);
+        gets(pass);
+        for( i=0;i<Ns;i++){
+            if(strcmp(user_name,stud[i].name)==0 && strcmp(pass,stud[i].password)==0){
+                flag=1;
+                x=i;
+            }
+        }
+        if(flag==1){
+            system("cls");
+            fclose(fptr);
+            student_panel(x);
+        }
+        else{
+            system("cls");
+            printf("Wrong Username or Password!\n Press any key to continue...\n ");
+            getchar();
+            menu();
+        }
+    }
+    else
+        menu();
 }
 void admin()
 {
-// Admin panel function
-printf("\n\t\tWelcome to Admin Panel.\n");
-printf("\n\t***********************************\n\n");
-printf("1. Update Teachers & Students Information\n");
-printf("2. Assign Courses To Teachers & Update.\n");
-printf("3. Go Back.\n");
-printf("Enter your choice : ");
-int c;
-scanf("%d",&c);
-switch(c){
-case 1:
-system("cls");
-update();
-break;
-case 2:
-system("cls");
-assigning();
-break;
-case 3:
-system("cls");
-menu();
-break;}
-default:
-system("cls");
-admin();
-break;
+    // Admin panel function
+    printf("\n\t\tWelcome to Admin Panel.\n");
+    printf("\n\t***********************************\n\n");
+    printf("1. Update Teachers & Students Information\n");
+    printf("2. Assign Courses To Teachers & Update.\n");
+    printf("3. Go Back.\n");
+    printf("Enter your choice : ");
+    int c;
+    scanf("%d",&c);
+    switch(c){
+        case 1:
+            system("cls");
+            update();
+            break;
+        case 2:
+            system("cls");
+            assigning();
+            break;
+        case 3:
+            system("cls");
+            menu();
+            break;}
+        default:
+            system("cls");
+            admin();
+            break;
+    }
 }
 void teachers()
 {
-system("cls");
-char ch;
-//Adding teacher info to record function
-FILE *fptr;
-fptr = fopen("record.bin","wb+");
-if(fptr == NULL){
-printf("Error!");
-exit(1);
-}
-printf("Admin Panel\n");
-printf("Create Teachers Account\n");
-printf("Press any key to continue... \n");
-getchar();
-system("cls");
-printf("Admin Panel\n");
-printf("How many teacher do you want to add: ");
-scanf("%d",&Nt);
-fprintf(fptr,"%d",Nt);
-system("cls");
-struct teacher tech[Nt];
-for(int i=0;i<Nt;i++){
-printf("Teacher Account.\n");
-printf("Enter name: ");
-fflush(stdin);
-gets(tech[i].name);
-printf("Enter mobile: ");
-fflush(stdin);
-gets(tech[i].mobile);
-printf("Enter E-mail: ");
-fflush(stdin);
-gets(tech[i].email);
-printf("Enter New Password: ");
-fflush(stdin);
-gets(tech[i].password);
-system("cls");
-}
-fwrite(&tech, sizeof(tech), 1, fptr);
-fclose(fptr);
-printf("Done!\n Press enter to continue.... \n");
-getchar();
-students();
+    system("cls");
+    char ch;
+    //Adding teacher info to record function
+    FILE *fptr;
+    fptr = fopen("record.bin","wb+");
+    if(fptr == NULL){
+        printf("Error!");
+        exit(1);
+    }
+    printf("Admin Panel\n");
+    printf("Create Teachers Account\n");
+    printf("Press any key to continue... \n");
+    getchar();
+    system("cls");
+    printf("Admin Panel\n");
+    printf("How many teacher do you want to add: ");
+    scanf("%d",&Nt);
+    fprintf(fptr,"%d",Nt);
+    system("cls");
+    struct teacher tech[Nt];
+    for(int i=0;i<Nt;i++){
+        printf("Teacher Account.\n");
+        printf("Enter name: ");
+        fflush(stdin);
+        gets(tech[i].name);
+        printf("Enter mobile: ");
+        fflush(stdin);
+        gets(tech[i].mobile);
+        printf("Enter E-mail: ");
+        fflush(stdin);
+        gets(tech[i].email);
+        printf("Enter New Password: ");
+        fflush(stdin);
+        gets(tech[i].password);
+        system("cls");
+    }
+    fwrite(&tech, sizeof(tech), 1, fptr);
+    fclose(fptr);
+    printf("Done!\n Press enter to continue.... \n");
+    getchar();
+    students();
 }
 void students()
 {
-system("cls");
-char ch;
-FILE *fptr;fptr = fopen("record.bin","ab+");
-if(fptr == NULL){
-printf("Error!");
-exit(1);
-}
-printf("Admin Panel\n");
-printf("Create Students Account\n");
-printf("Press any key to continue...\n ");
-getchar();
-system("cls");
-printf("Admin Panel\n");
-printf("How many Student do you want to add: ");
-scanf("%d",&Ns);
-fprintf(fptr,"%d",Ns);
-system("cls");
-struct student stud[Ns];
-for(int i=0;i<Ns;i++){
-printf("Student Account\n");
-printf("Enter name: ");
-fflush(stdin);
-gets(stud[i].name);
-printf("Enter Roll: ");
-fflush(stdin);
-scanf("%d",&stud[i].roll);
-printf("Enter E-mail: ");
-fflush(stdin);
-gets(stud[i].email);
-printf("Enter Mobile: ");
-fflush(stdin);
-gets(stud[i].mobile);
-printf("Enter Address: ");
-fflush(stdin);
-gets(stud[i].address);
-printf("Enter Password: ");
-fflush(stdin);
-gets(stud[i].password);
-system("cls");
-}
-fwrite(&stud, sizeof(stud), 1, fptr);
-fclose(fptr);
-printf("Done!\nPress Enter to continue.. \n");
-system("cls");
-menu();
+    system("cls");
+    char ch;
+    FILE *fptr;fptr = fopen("record.bin","ab+");
+    if(fptr == NULL){
+        printf("Error!");
+        exit(1);
+    }
+    printf("Admin Panel\n");
+    printf("Create Students Account\n");
+    printf("Press any key to continue...\n ");
+    getchar();
+    system("cls");
+    printf("Admin Panel\n");
+    printf("How many Student do you want to add: ");
+    scanf("%d",&Ns);
+    fprintf(fptr,"%d",Ns);
+    system("cls");
+    struct student stud[Ns];
+    for(int i=0;i<Ns;i++){
+        printf("Student Account\n");
+        printf("Enter name: ");
+        fflush(stdin);
+        gets(stud[i].name);
+        printf("Enter Roll: ");
+        fflush(stdin);
+        scanf("%d",&stud[i].roll);
+        printf("Enter E-mail: ");
+        fflush(stdin);
+        gets(stud[i].email);
+        printf("Enter Mobile: ");
+        fflush(stdin);
+        gets(stud[i].mobile);
+        printf("Enter Address: ");
+        fflush(stdin);
+        gets(stud[i].address);
+        printf("Enter Password: ");
+        fflush(stdin);
+        gets(stud[i].password);
+        system("cls");
+    }
+    fwrite(&stud, sizeof(stud), 1, fptr);
+    fclose(fptr);
+    printf("Done!\nPress Enter to continue.. \n");
+    system("cls");
+    menu();
 }
 void update()
 {

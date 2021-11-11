@@ -599,8 +599,7 @@ int main()
         jump:
         system("cls");
         printf("\n\t\tWelcome to Department Management System.\n");
-        printf("\n\t#####################################################\n\n"
-        );
+        printf("\n\t#####################################################\n\n");
         printf("Admin Panel\n");
         printf("Enter Name: ");
         fflush(stdin);

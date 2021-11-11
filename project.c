@@ -588,7 +588,7 @@ int compare(char a[],char b[])
     else
         return 0;
 }
-// function for comparision two}
+// function for comparision two
 int main()
 {
     FILE *fptr;

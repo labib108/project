@@ -1,1 +1,1 @@
-# project about versity manajment system in c
+# Student management system using C
